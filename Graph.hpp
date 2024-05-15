@@ -8,11 +8,13 @@
 #define GRAPH_HPP
 
 #include <vector>
+#include <iostream>
 using namespace std;
 namespace ariel {
 class Graph {
     vector<vector<int>> adjMatrix;
 public:
+
     Graph();  // Constructor
     // Function to load the graph from a given input
     void loadGraph(const vector<vector<int>>& inputMatrix);
@@ -56,6 +58,12 @@ public:
 
     // operator*= with a skalar
     Graph& operator*=(int skalar);
+
+    // operator/ with a skalar
+    Graph operator/(int skalar) const;
+
+    // operator/= with a skalar
+    Graph& operator/=(int skalar);
 
     // operator* with another matrix
     Graph operator*(const Graph& other) const;

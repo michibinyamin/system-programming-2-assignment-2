@@ -2,6 +2,7 @@
 //GMAIL - michibinyamin@gmail.com
 
 #include "Graph.hpp"
+#include <vector>
 #include <iostream>
 using namespace std;
 
@@ -45,6 +46,7 @@ vector<vector<int>> adjMatrix;
 
     // operator+ 
     Graph Graph::operator+(const Graph& other) const{
+
         // Throgh exeption if the matricies are not compatible
         if (other.getg().size() != this->getg().size())
         {
@@ -53,13 +55,14 @@ vector<vector<int>> adjMatrix;
         
         vector<vector<int>> other_matrix = other.getg();    // Get the other matrix
         int size = this->getg().size();                     // Store the matricies size for itarations
-        vector<vector<int>> new_matrix(size);               // This is the return matrix
+        // Initialize square matrix with size n x n
+        vector<vector<int>> new_matrix(size, vector<int>(size));
 
-        for (size_t i = 0; i < size; i++)
+        for (size_t i = 0; i < size; ++i)
         {
-            for (size_t j = 0; j < size; j++)
-            {
-                new_matrix[i][j] = other_matrix[i][j] + this->getg()[i][j];     // Add up the values
+            for (size_t j = 0; j < size; ++j)
+            {    
+                new_matrix[i][j] = other_matrix[i][j] + this->getg()[i][j];   // Add up the values
             }
         }
         Graph newg;
@@ -79,7 +82,8 @@ vector<vector<int>> adjMatrix;
         
         vector<vector<int>> other_matrix = other.getg();    // Get the other matrix
         int size = this->getg().size();                     // Store the matricies size for itarations
-        vector<vector<int>> new_matrix(size);               // This is the return matrix
+        // Initialize square matrix with size n x n
+        vector<vector<int>> new_matrix(size, vector<int>(size));
         
         for (size_t i = 0; i < size; i++)
         {
@@ -106,7 +110,8 @@ vector<vector<int>> adjMatrix;
         vector<vector<int>> other_matrix = other.getg();    // Get the other matrix
 
         int size = this->getg().size();                     // Store the matricies size for itarations
-        vector<vector<int>> this_matrix(size);              // This is the return matrix
+        // Initialize square matrix with size n x n
+        vector<vector<int>> this_matrix(size, vector<int>(size));
 
         for (size_t i = 0; i < size; i++)
         {
@@ -133,7 +138,8 @@ vector<vector<int>> adjMatrix;
         vector<vector<int>> other_matrix = other.getg();    // Get the other matrix
 
         int size = this->getg().size();                     // Store the matricies size for itarations
-        vector<vector<int>> this_matrix(size);              // This is the return matrix
+        // Initialize square matrix with size n x n
+        vector<vector<int>> this_matrix(size, vector<int>(size));
 
         for (size_t i = 0; i < size; i++)
         {
@@ -153,7 +159,8 @@ vector<vector<int>> adjMatrix;
     // operator+ unary
     Graph Graph::operator+() const{
         int size = this->getg().size();                     // Store the matricies size for itarations
-        vector<vector<int>> new_matrix(size);               // This is the return matrix
+        // Initialize square matrix with size n x n
+        vector<vector<int>> new_matrix(size, vector<int>(size));
 
         for (size_t i = 0; i < size; i++)
         {
@@ -173,7 +180,8 @@ vector<vector<int>> adjMatrix;
     // operator- unary
     Graph Graph::operator-() const{
         int size = this->getg().size();                     // Store the matricies size for itarations
-        vector<vector<int>> new_matrix(size);               // This is the return matrix
+        // Initialize square matrix with size n x n
+        vector<vector<int>> new_matrix(size, vector<int>(size));
 
         for (size_t i = 0; i < size; i++)
         {
@@ -193,7 +201,8 @@ vector<vector<int>> adjMatrix;
     // operator++
     Graph& Graph::operator++(){
         int size = this->getg().size();                     // Store the matricies size for itarations
-        vector<vector<int>> new_matrix(size);               // This is the return matrix
+        // Initialize square matrix with size n x n
+        vector<vector<int>> new_matrix(size, vector<int>(size));
 
         for (size_t i = 0; i < size; i++)
         {
@@ -212,7 +221,8 @@ vector<vector<int>> adjMatrix;
     // operator--
     Graph& Graph::operator--(){
         int size = this->getg().size();                     // Store the matricies size for itarations
-        vector<vector<int>> new_matrix(size);               // This is the return matrix
+        // Initialize square matrix with size n x n
+        vector<vector<int>> new_matrix(size, vector<int>(size));
 
         for (size_t i = 0; i < size; i++)
         {
@@ -231,7 +241,8 @@ vector<vector<int>> adjMatrix;
     // operator* with a skalar
     Graph Graph::operator*(int skalar) const{
         int size = this->getg().size();                     // Store the matricies size for itarations
-        vector<vector<int>> new_matrix(size);               // This is the return matrix
+        // Initialize square matrix with size n x n
+        vector<vector<int>> new_matrix(size, vector<int>(size));
 
         for (size_t i = 0; i < size; i++)
         {
@@ -250,13 +261,54 @@ vector<vector<int>> adjMatrix;
     // operator*= with a skalar
     Graph& Graph::operator*=(int skalar){
         int size = this->getg().size();                     // Store the matricies size for itarations
-        vector<vector<int>> new_matrix(size);               // This is the return matrix
+        // Initialize square matrix with size n x n
+        vector<vector<int>> new_matrix(size, vector<int>(size));
 
         for (size_t i = 0; i < size; i++)
         {
             for (size_t j = 0; j < size; j++)
             {
                 new_matrix[i][j] = this->getg()[i][j]*skalar;        // times the value by a skalar
+            }
+        }
+        // Load the result matrix into the current object
+        this->loadGraph(new_matrix);
+        return *this; // Return reference to current object
+    }
+
+
+
+    // operator/ with a skalar
+    Graph Graph::operator/(int skalar) const{
+        int size = this->getg().size();                     // Store the matricies size for itarations
+        // Initialize square matrix with size n x n
+        vector<vector<int>> new_matrix(size, vector<int>(size));
+
+        for (size_t i = 0; i < size; i++)
+        {
+            for (size_t j = 0; j < size; j++)
+            {
+                new_matrix[i][j] = this->getg()[i][j]/skalar;        // devide the value by a skalar
+            }
+        }
+        Graph newg;
+        newg.loadGraph(new_matrix);
+        return newg;
+    }
+
+
+
+    // operator/= with a skalar
+    Graph& Graph::operator/=(int skalar){
+        int size = this->getg().size();                     // Store the matricies size for itarations
+        // Initialize square matrix with size n x n
+        vector<vector<int>> new_matrix(size, vector<int>(size));
+
+        for (size_t i = 0; i < size; i++)
+        {
+            for (size_t j = 0; j < size; j++)
+            {
+                new_matrix[i][j] = this->getg()[i][j]*skalar;        // devide the value by a skalar
             }
         }
         // Load the result matrix into the current object
@@ -343,40 +395,51 @@ vector<vector<int>> adjMatrix;
 
     // operator>
     bool Graph::operator>(const Graph& other) const{
+        vector<vector<int>> matrix1 = this->getg();
+        vector<vector<int>> matrix2 = other.getg();
+        
 
+
+        return true;
+        
     }
 
     // operator>=
     bool Graph::operator>=(const Graph& other) const{
-
+        return true;
     }
 
     // operator<
     bool Graph::operator<(const Graph& other) const{
-
+        return true;
     }
 
     // operator<=
     bool Graph::operator<=(const Graph& other) const{
-
+        return true;
     }
 
     // operator==
     bool Graph::operator==(const Graph& other) const{
-
+        return true;
     }
 
     // operator!=
     bool Graph::operator!=(const Graph& other) const{
-
+        return true;
     }
 
-    // << operator overload, it does not belong to the class
+    // << operator overload, it does not belong to the class 
     ostream& operator<<(ostream& os, const Graph& graph){
-
+        for (const auto& row : graph.getg()) {
+            for (int value : row) {
+               os << value << " ";
+               
+            }
+        os << endl;
+        }
+        return os;
     }
-
-    
 }
 
 
