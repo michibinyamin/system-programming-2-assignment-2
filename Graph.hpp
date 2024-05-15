@@ -22,6 +22,7 @@ public:
     // Function to print the graph's adjacency matrix
     void printGraph() const;
 
+    string stringGraph() const;
 
     // Function to access the adjacency matrix
     const vector<vector<int>>& getg() const;

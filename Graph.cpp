@@ -33,10 +33,24 @@ vector<vector<int>> adjMatrix;
         }
     }
 
+    // Function to return the graph's adjacency matrix as a string
+    string Graph::stringGraph() const {
+        string s = "";
+        for (const auto& row : adjMatrix) {
+            for (int value : row) {
+                s += to_string(value) + " ";
+            }
+            s += "\n";
+        }
+        return s;
+    }
+    
+
     // Function to access the adjacency matrix
     const vector<vector<int>>& Graph::getg() const {
         return adjMatrix;
     }
+
 
 
 
@@ -308,7 +322,7 @@ vector<vector<int>> adjMatrix;
         {
             for (size_t j = 0; j < size; j++)
             {
-                new_matrix[i][j] = this->getg()[i][j]*skalar;        // devide the value by a skalar
+                new_matrix[i][j] = this->getg()[i][j]/skalar;        // devide the value by a skalar
             }
         }
         // Load the result matrix into the current object
