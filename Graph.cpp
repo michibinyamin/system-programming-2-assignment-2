@@ -103,7 +103,7 @@ vector<vector<int>> adjMatrix;
         {
             for (size_t j = 0; j < size; j++)
             {
-                new_matrix[i][j] = other_matrix[i][j] - this->getg()[i][j];     // Add up the values
+                new_matrix[i][j] = this->getg()[i][j] - other_matrix[i][j];     // Add up the values
             }
         }
 
@@ -131,7 +131,7 @@ vector<vector<int>> adjMatrix;
         {
             for (size_t j = 0; j < size; j++)
             {
-                this_matrix[i][j] += other_matrix[i][j];     // Add up the values
+                this_matrix[i][j] = this->getg()[i][j] + other_matrix[i][j];     // Add up the values
             }
         }
 
@@ -159,7 +159,7 @@ vector<vector<int>> adjMatrix;
         {
             for (size_t j = 0; j < size; j++)
             {
-                this_matrix[i][j] -= other_matrix[i][j];     // subtrack the values
+                this_matrix[i][j] = this->getg()[i][j] - other_matrix[i][j];     // subtrack the values
             }
         }
 

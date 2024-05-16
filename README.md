@@ -10,9 +10,6 @@ assumptions :
 
 
 
-
-* i have added a method which returns a string of the graph, this way i can test the graphs values with a string representation
-
 **Operaters** 
 
 **Arothmatic operators** 
@@ -26,6 +23,7 @@ assumptions :
 - operator- unary :
 
 - operator+= :
+- I have added a method which returns a string of the graph, this way i can test the graphs values with a string representation
 
 - operator-= :
 
@@ -58,6 +56,11 @@ assumptions :
 - operator== : 
 
 - operator!= : 
+
+
+**Tests**
+- I have added a method which returns a string of the graph, this way i can test the graphs values with a string representation
+
 
 **General** 
 - operator<< : the << operator overload does not belong to the class
