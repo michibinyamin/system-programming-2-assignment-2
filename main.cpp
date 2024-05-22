@@ -36,14 +36,23 @@ int main()
     cout<<"graph g1 + g2 is : \n"<<g3<<endl;             // Should print the matrix of the graph: [0, 2, 1], [2, 0, 3], [1, 3, 0]
 
     g1 *= -2;                                            // Multiply the graph by -2.
-    cout<<"graph g1 times skalar -2 : \n"<<g1<<endl;     // Should print the matrix of the graph: [0, -2, 0], [-2, 0, -2], [0, -2, 0]
+    cout<<"graph g1 times skalar -2 and store in g1: \n"<<g1<<endl;     // Should print the matrix of the graph: [0, -2, 0], [-2, 0, -2], [0, -2, 0]
 
     g1 /= -2;
-    cout<<"graph g1 divided by skalar -2 is : \n"<<g1<<endl;
+    cout<<"graph g1 divided by skalar -2 is and store in g1: \n"<<g1<<endl;
 
     ariel::Graph g4 = g1 * g2;                              // Multiply the two graphs together.
     cout<<"graph g1 times graph g2 is : \n"<<g4<<endl;   // Should print the multiplication of the matrices of g1 and g2: [0, 0, 2], [1, 0, 1], [1, 0, 0]
 
+
+    cout<< "The graphs now are:\ng1:\n"<<g1<<"\ng2:\n"<<g2;
+    string t = "no";
+    if (g1<g2)
+    {
+        t = "yes";
+    }
+    
+    cout<< "is g1 smaller then g2? answer : " << t <<"\n";
 
     ariel::Graph g5;
     // 5x5 matrix that represents a connected graph.

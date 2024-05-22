@@ -158,47 +158,63 @@ TEST_CASE("Compare operations")
     g2.loadGraph(graph2);
 
     vector<vector<int>> graph3 = {
-        {0, 1, 0},
+        {0, 1, 2},
         {1, 0, 1},
         {0, 1, 0}};
     g3.loadGraph(graph3);
 
     vector<vector<int>> graph4 = {
-        {0, 1, 0},
-        {1, 0, 1},
-        {0, 1, 0}};
+        {0, 1},
+        {1, 0}};
     g4.loadGraph(graph4);
 
     vector<vector<int>> graph5 = {
         {0, 1, 0},
-        {1, 0, 1},
-        {0, 1, 0}};
+        {0, 0, 0},
+        {0, 0, 0}};
     g5.loadGraph(graph5);
 
     vector<vector<int>> graph6 = {
-        {0, 1, 0},
+        {0, 5, 0},
         {1, 0, 1},
         {0, 1, 0}};
     g6.loadGraph(graph6);
 
 
     // operator>
-
-
+    CHECK((g2 > g1) == true);
+    CHECK((g3 > g1) == true);
+    CHECK((g4 > g5) == true);
+    CHECK((g1 > g6) == false);
     // operator>=
-
+    CHECK((g2 >= g1) == true);
+    CHECK((g3 >= g1) == true);
+    CHECK((g4 >= g5) == true);
+    CHECK((g1 >= g6) == true);
 
     // operator<
-
+    CHECK((g1 < g2) == true);
+    CHECK((g3 < g1) == false);
+    CHECK((g4 < g5) == false);
+    CHECK((g1 < g6) == false);
 
     // operator<=
-
+    CHECK((g2 <= g1) == false);
+    CHECK((g3 <= g1) == false);
+    CHECK((g5 <= g4) == true);
+    CHECK((g1 <= g6) == true);
 
     // operator==
-
+    CHECK((g2 == g1) == false);
+    CHECK((g3 == g1) == false);
+    CHECK((g5 == g4) == false);
+    CHECK((g1 == g6) == true);  // This is true becuase g1 is not bigger then g2 and g2 is not bigger then g1, as we were told to do
 
     // operator!=
-
+    CHECK((g2 != g1) == true);
+    CHECK((g3 != g1) == true);
+    CHECK((g5 != g4) == true);
+    CHECK((g1 != g6) == false);  
 
 }
 

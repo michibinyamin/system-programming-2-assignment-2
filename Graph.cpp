@@ -51,6 +51,22 @@ vector<vector<int>> adjMatrix;
         return adjMatrix;
     }
 
+    // Function to get the number of edges
+    const int Graph::get_num_edges() const {
+        int count = 0;
+        for (const auto& row : adjMatrix) {
+            for (int value : row) {
+                if (value != 0)
+                {
+                    count++;
+                }
+            
+            }
+        }
+        return count;
+    }
+
+
 
 
 
@@ -180,7 +196,7 @@ vector<vector<int>> adjMatrix;
         {
             for (size_t j = 0; j < size; j++)
             {
-                new_matrix[i][j] = +this->getg()[i][j];        // make value positive and add to new matrix
+                new_matrix[i][j] = +this->getg()[i][j];        // make value positive and add to new matrix(does not make a diffarence)
             }
         }
 
@@ -405,42 +421,121 @@ vector<vector<int>> adjMatrix;
 
     // Comparisson operators
 
-
+    
+    bool iscontains(const Graph& g1, const Graph& g2){
+        // Check if the sizes are possible for being containd
+        if (g1.getg().size() <= g2.getg().size())
+        {
+            return false;
+        }
+        for (size_t i = 0; i < g2.getg().size(); i++) {
+            for (size_t j = 0; j < g2.getg().size(); j++) {
+                // Check that there is not a edge which exists in other but not in this
+                if(g2.getg()[i][j] != 0 && g1.getg()[i][j] == 0){
+                    return false;
+                }
+            }
+        }
+        // Check that they are not the same graph
+        return true;
+    }
 
     // operator>
     bool Graph::operator>(const Graph& other) const{
-        vector<vector<int>> matrix1 = this->getg();
-        vector<vector<int>> matrix2 = other.getg();
-        
+        // Check if other is containd in this graph
+        if(iscontains(*this, other)){
+            return true;
+        }
+        else if(iscontains(other, *this)){
+            return false;
+        }
 
-
-        return true;
-        
+        // If both are not containd in each other then check if this has more edges
+        if (this->get_num_edges() > other.get_num_edges())
+        {
+            return true;
+        }
+        else if (this->get_num_edges() == other.get_num_edges())
+        {
+            // Check if this has more vertecies then other
+            if (this->getg().size() > other.getg().size())
+            {
+                return true;
+            }
+        }
+        // If none of the above happend then the other graph is bigger or they are equal, return false
+        return false;
     }
 
     // operator>=
     bool Graph::operator>=(const Graph& other) const{
-        return true;
+        return !(*this<other);
     }
 
     // operator<
     bool Graph::operator<(const Graph& other) const{
-        return true;
+        // Check if this is containd in other graph
+        if(iscontains(other, *this)){
+            return true;
+        }
+        else if(iscontains(*this, other)){
+            return false;
+        }
+
+        // If both are not containd in each other then check if this has more edges
+        if (this->get_num_edges() < other.get_num_edges())
+        {
+            return true;
+        }
+        else if (this->get_num_edges() == other.get_num_edges())
+        {
+            // Check if this has more vertecies then other
+            if (this->getg().size() < other.getg().size())
+            {
+                return true;
+            }
+        }
+        // If none of the above happend then the other graph is bigger or they are equal, return false
+        return false;
     }
 
     // operator<=
     bool Graph::operator<=(const Graph& other) const{
-        return true;
+        return !(*this>other);
     }
 
     // operator==
     bool Graph::operator==(const Graph& other) const{
-        return true;
+        // First option - they are the same
+        if(this->getg().size() == other.getg().size()){
+            bool equel = true;
+            for (size_t i = 0; i < other.getg().size(); i++)
+            {
+                for (size_t j = 0; j < other.getg().size(); j++)
+                {
+                    if (this -> getg()[i][j] != other.getg()[i][j])
+                    {
+                        equel = false;
+                    }
+                }
+            }
+            if (equel)
+            {
+                return true;
+            }
+        }
+        // If they are not equel check if both are not bigger then the other
+        if (!(*this > other) && !(*this < other))
+        {
+            return true;
+        }
+        // If both dont happen then return false
+        return false;
     }
 
     // operator!=
     bool Graph::operator!=(const Graph& other) const{
-        return true;
+        return !(*this == other);
     }
 
     // << operator overload, it does not belong to the class 

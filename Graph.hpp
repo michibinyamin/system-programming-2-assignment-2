@@ -27,6 +27,9 @@ public:
     // Function to access the adjacency matrix
     const vector<vector<int>>& getg() const;
 
+    // Function to return the number of edges in the graph (if edge = 0 then there is no edge)
+    const int get_num_edges() const;
+
 
     // Arothmatic operators
 
@@ -71,6 +74,7 @@ public:
 
     // operator*= with another matrix
     Graph& operator*=(const Graph& other);
+
 
 
 
